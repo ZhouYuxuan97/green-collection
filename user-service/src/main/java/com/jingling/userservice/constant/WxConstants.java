@@ -9,8 +9,8 @@ package com.jingling.userservice.constant;
  **/
 public final class WxConstants {
 
-    public static final String APPID = "wx3aacff44502eddf9";
-    public static final String APPSECRET = "340e733410b970771c8ac579a727e1d5";
+    public static final String APPID = "APPID";
+    public static final String APPSECRET = "APPSECRET";
 
     //授权
     public static final String AUTH_BASE_URL = "https://open.weixin.qq.com/connect/oauth2/authorize?";
