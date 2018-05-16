@@ -7,7 +7,7 @@ spring:
     cache: false
 ##jdbc
   datasource:
-    url: jdbc:mysql://59.110.170.212:3306/green?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://localhost:3306/green?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: green
     password: Green123!
     driverClassName: com.mysql.jdbc.Driver
@@ -37,6 +37,6 @@ eureka:
 #公网ip相关
 address:
   server:
-    ip: http://wx.monkeypaixiaoxin.cn/
+    ip: http://www.xxx.cn/
     mail:
       validate: user/validate/

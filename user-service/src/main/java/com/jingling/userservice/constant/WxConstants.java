@@ -19,20 +19,20 @@ public final class WxConstants {
     //获取用户信息
     public static final String INFO_BASE_URL = "https://api.weixin.qq.com/sns/userinfo?";
     //回调
-    public static final String REDIRECT_URL = "http://wx.monkeypaixiaoxin.cn/user/wx/callBack";
+    public static final String REDIRECT_URL = "http://www.xxx.cn/user/wx/callBack";
     //允许的范围
     public static final String SCOPE = "snsapi_userinfo";
     //token
-    public static final String TOKEN = "zhangxiaoxin";
+    public static final String TOKEN = "token";
 
     //微信请求跳转到的登录页面
-    public static final String WECHAT_LOGIN = "http://1l8u025289.iok.la:12206/green-collection/html/wechat/login_wechat.html";
+    public static final String WECHAT_LOGIN = "http://1l8u025289.iok.la/green-collection/html/wechat/login_wechat.html";
     //微信授权成功的页面
-    public static final String SUCCESS_INDEX = "http://1l8u025289.iok.la:12206/green-collection/html/wechat/index.html";
+    public static final String SUCCESS_INDEX = "http://1l8u025289.iok.la/green-collection/html/wechat/index.html";
     //注册成功后的过渡页面
-    public static final String REGISTER_SUCCESS = "http://1l8u025289.iok.la:12206/green-collection/html/wechat/register_success.html";
+    public static final String REGISTER_SUCCESS = "http://1l8u025289.iok.la/green-collection/html/wechat/register_success.html";
     //激活成功后的过渡页面
-    public static final String VALIDATE_SUCCESS = "http://1l8u025289.iok.la:12206/green-collection/html/wechat/validate_success.html";
+    public static final String VALIDATE_SUCCESS = "http://1l8u025289.iok.la/green-collection/html/wechat/validate_success.html";
 
     private WxConstants(){}
 

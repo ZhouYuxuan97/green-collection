@@ -8,8 +8,8 @@ spring:
       server:
         git:
           uri: https://gitee.com/finalcola/green-collection-config.git
-          username: 18080879806m@sina.cn
-          password: z845447141
+          username: username
+          password: password
           search-paths: config
   rabbitmq:
     host: localhost
