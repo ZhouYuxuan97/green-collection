@@ -1,0 +1,29 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: portal-service
+##jdbc
+  datasource:
+    url: jdbc:mysql://59.110.170.212:3306/green?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: green
+    password: Green123!
+    driverClassName: com.mysql.jdbc.Driver
+  jpa:
+    database : MYSQL
+    show-sql: true
+server:
+  port: 9921
+
+##mybatis
+mybatis:
+ #mybatis.mapper-recyclerInfos=classpath:mapper/*.xml
+  typeAliasesPackage: com.jingling.basic.po
+  mapperLocations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka/

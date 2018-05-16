@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jingling.wasteservice.mapper.GarbageMapper">
+    <sql id="insert_cols">
+        id, second_category_id, price, creater_id, photo_path, description,garbage_name
+    </sql>
+
+    <insert id="add" parameterType="Garbage" keyProperty="id"  useGeneratedKeys="true">
+        insert into garbage(
+        <include refid="insert_cols"/>
+        ) values (
+        #{id},#{secondcategoryid},#{price},#{createrid},#{photopath}
+        ,#{description},#{garbagename}
+        )
+    </insert>
+
+    <delete id="deleteGarbageById" parameterType="BigInteger">
+        DELETE FROM garbage WHERE id=#{value}
+    </delete>
+
+    <select id="getGarbageById" parameterType="BigInteger" resultType="com.jingling.wasteservice.po.Garbage">
+        select * from garbage WHERE id=#{value}
+    </select>
+
+    <select id="findGarbageByName" parameterType="String" resultType="com.jingling.wasteservice.po.Garbage">
+        select * from garbage WHERE garbage_name=#{value}
+    </select>
+
+    <select id="findGarbageBySecond_Id" parameterType="BigInteger" resultType="com.jingling.wasteservice.po.Garbage">
+        select * from garbage WHERE second_category_id like #{value}
+    </select>
+
+    <select id="getGarbageName"  parameterType="String" resultType="com.jingling.wasteservice.po.Garbage">
+        select * from garbage
+    </select>
+
+    <select id="getGarbageList"  resultType="com.jingling.wasteservice.po.Garbage">
+        select * from garbage
+        limit #{start}, #{size}
+    </select>
+
+    <select id="countGarbage" resultType="int">
+         SELECT  COUNT(*) FROM garbage
+    </select>
+
+    <select id="listByIds" resultType="garbage">
+        select * from garbage
+        WHERE id IN
+        <foreach collection="list" separator="," item="item" index="i" open="(" close=")">
+            #{item}
+        </foreach>
+    </select>
+
+</mapper>

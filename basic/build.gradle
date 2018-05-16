@@ -1,0 +1,22 @@
+group 'com.jingling'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+description='基础模块，如po，service约定等'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //gson
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.0'
+
+    compile('com.fasterxml.jackson.core:jackson-databind:2.8.10')
+//    compile 'org.springframework:spring-web:4.3.7.RELEASE'
+//    compile group: 'org.apache.shiro', name: 'shiro-core', version: '1.4.0'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

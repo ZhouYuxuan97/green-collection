@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    config:
+      profile: dev
+      label: master
+      uri: http://localhost:7999/
+  application:
+    name: portal-service

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jingling.orderservice.mapper.OrderInfoMapper">
+    <sql id="insert_cols">
+        recycler_id, user_id, address_id, is_paid, pay_type, order_status, create_time, update_time, order_amount, description
+    </sql>
+
+    <insert id="save" parameterType="OrderInfo" keyProperty="orderId" useGeneratedKeys="true">
+        insert into order_info (
+        <include refid="insert_cols"/>
+        ) values (
+        #{recyclerId},#{userId},#{addressId},#{isPaid},#{payType}
+        ,#{orderStatus},#{createTime},#{updateTime},#{orderAmount},#{description}
+        )
+    </insert>
+
+    <delete id="deleteById" parameterType="BigInteger">
+        DELETE FROM order_info WHERE order_id=#{value}
+    </delete>
+
+    <select id="getById" parameterType="BigInteger" resultType="OrderInfo">
+        select * from order_info WHERE order_id=#{value}
+    </select>
+
+    <select id="listByUserId" parameterType="BigInteger">
+        select * from order_info WHERE user_id=#{value}
+        ORDER BY create_time DESC
+        limit #{start},#{size}
+    </select>
+
+    <update id="update" parameterType="OrderInfo">
+        UPDATE order_info
+        <set>
+            <if test="recyclerId != null">
+                recycler_id = #{recyclerId},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="addressId != null">
+                address_id = #{addressId},
+            </if>
+            <if test="isPaid != null">
+                is_paid = #{isPaid},
+            </if>
+            <if test="payType != null">
+                pay_type = #{payType},
+            </if>
+            <if test="orderStatus != null">
+                order_status = #{orderStatus},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="orderAmount != null">
+                order_amount = #{orderAmount},
+            </if>
+            <if test="description != null">
+                description = #{description}
+            </if>
+        </set>
+        WHERE order_id=#{orderId}
+    </update>
+
+    <update id="updateOrderStatus">
+        UPDATE order_info
+        SET
+        order_status=#{orderStatus},
+        update_time=#{updateTime}
+        WHERE order_id=#{orderId}
+    </update>
+
+    <select id="listOrderByRecyclerIdWithStatus" resultType="OrderInfo">
+        select * from order_info
+        WHERE recycler_id=#{recyclerId} AND order_status=#{status}
+        ORDER BY create_time DESC
+        limit #{start},#{size}
+    </select>
+
+
+    <select id="listRecyclerId" resultType="com.jingling.orderservice.dto.OrderDistributionInfo">
+        select recycler_id AS recyclerId,COUNT(*) AS orderCount from order_info
+        WHERE order_status=#{status}
+        GROUP BY recycler_id
+        ORDER BY orderCount DESC
+        limit #{start},#{size}
+    </select>
+
+    <select id="listRecyclerFree" resultType="com.jingling.orderservice.dto.OrderDistributionInfo">
+        select recycler_id,COUNT(*) from order_info
+        WHERE order_status=#{status}
+        GROUP BY recycler_id
+        ORDER BY COUNT(*)
+        limit 0,#{size}
+    </select>
+
+    <select id="listOrder" resultType="OrderInfo">
+        select * from order_info
+        WHERE order_status=#{status}
+        ORDER BY create_time
+        limit #{start},#{size}
+    </select>
+
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jingling.wasteservice.mapper.SecondGarbageCategoryMapper">
+    <sql id="insert_cols">
+        id, first_id,second_name, description, photo_path
+    </sql>
+
+    <insert id="add" parameterType="SecondGarbageCategory" keyProperty="id"  useGeneratedKeys="true">
+        insert into second_garbage_category(
+        <include refid="insert_cols"/>
+        ) values (
+        #{id},#{firstId},#{secondname},#{description},#{photoPath}
+        )
+    </insert>
+
+    <select id="findsecondGarbageCategoryByName" parameterType="String" resultType="com.jingling.wasteservice.po.SecondGarbageCategory">
+        select * from second_garbage_category WHERE second_name like #{value}
+    </select>
+
+    <delete id="deletesecondGarbageCategoryById" parameterType="BigInteger">
+        DELETE FROM second_garbage_category WHERE id=#{value}
+    </delete>
+
+    <select id="getsecondGarbageCategoryById" parameterType="BigInteger" resultType="com.jingling.wasteservice.po.SecondGarbageCategory">
+        select * from second_garbage_category WHERE id=#{value}
+    </select>
+
+    <select id="getsecondGarbageCategoryByFirstId" parameterType="BigInteger" resultType="com.jingling.wasteservice.po.SecondGarbageCategory">
+        select * from second_garbage_category WHERE first_id=#{value}
+    </select>
+
+    <select id="getSecondGarbageCategoryList" resultType="com.jingling.wasteservice.po.SecondGarbageCategory">
+        select * from second_garbage_category
+    </select>
+
+</mapper>

@@ -1,0 +1,35 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: cms-service
+##jdbc
+  datasource:
+    url: jdbc:mysql://59.110.170.212:3306/green?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: green
+    password: Green123!
+    #url: jdbc:mysql:///green?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    #username: root
+    #password: 1022zhang
+    driverClassName: com.mysql.jdbc.Driver
+  jpa:
+    database : MYSQL
+    show-sql: true
+server:
+  port: 9911
+
+##mybatis
+mybatis:
+ #mybatis.mapper-recyclerInfos=classpath:mapper/*.xml
+  typeAliasesPackage: com.jingling.basic.po
+  mapperLocations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+eureka:
+  client:
+    #Hy添加的
+#    register-with-eureka: false
+#    fetch-registry: false
+    service-url:
+      defaultZone: http://120.79.201.63:8000/eureka/

@@ -1,0 +1,13 @@
+rootProject.name = 'green-collection'
+include 'server'
+include 'config-server'
+include 'mail-service'
+include 'basic'
+include 'order-service'
+include 'waste-service'
+include 'user-service'
+include 'pay-service'
+include 'common-service'
+include 'cms-service'
+include 'portal-service'
+

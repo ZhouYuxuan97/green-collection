@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jingling.orderservice.mapper.OrderItemMapper">
+
+    <sql id="collumsForSearch">
+        order_item_id,order_id,garbage_id, garbage_name, garbage_photo_path,
+        garbage_price, garbage_number, garbage_weight
+    </sql>
+
+    <insert id="save" parameterType="List" useGeneratedKeys="true" keyProperty="orderItemId">
+        insert into order_item
+        (order_id,garbage_id, garbage_name, garbage_photo_path,
+        garbage_price, garbage_number, garbage_weight)
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (#{item.orderId},#{item.garbageId},#{item.garbageName},#{item.garbagePhotoPath},
+            #{item.garbagePrice},#{item.garbageNumber},#{item.garbageWeight})
+        </foreach>
+    </insert>
+
+    <delete id="deleteById" parameterType="BigInteger">
+        DELETE FROM order_item WHERE order_id = #{value}
+    </delete>
+
+    <delete id="deleteByOrderId" parameterType="BigInteger">
+        DELETE FROM order_item
+        WHERE order_id=#{value}
+    </delete>
+
+    <select id="getById" parameterType="BigInteger" resultType="OrderItem">
+        select
+        <include refid="collumsForSearch"/>
+        from order_item WHERE order_item_id = #{value}
+    </select>
+
+    <select id="listByUserId" parameterType="BigInteger" resultType="OrderItem">
+        SELECT
+        <include refid="collumsForSearch"/>
+        FROM order_item
+        WHERE order_id = #{value}
+    </select>
+
+
+</mapper>

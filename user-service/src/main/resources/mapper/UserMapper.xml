@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jingling.userservice.mapper.UserMapper">
+
+    <insert id="insertUser" parameterType="User">
+
+        INSERT
+        INTO user(username, nickname, password, openid, unionid, email, phone, address, salt, validate_code, is_locked, create_time, update_time)
+        VALUES (#{username}, #{nickname}, #{password}, #{openid}, #{unionid}, #{email}, #{phone}, #{address}, #{salt}, #{validateCode}, #{isLocked}, #{createTime}, #{updateTime})
+
+    </insert>
+
+    <select id="getUserInfoByOpenid" resultType="user">
+
+        SELECT username, nickname, password, email, phone, address, is_locked
+        FROM user
+        WHERE user.openid = #{value}
+
+    </select>
+
+    <select id="getUserInfoByUsername" resultType="user">
+
+        SELECT username, nickname, password, email, phone, address, is_locked, create_time, update_time
+        FROM user
+        WHERE user.username = #{value}
+
+    </select>
+
+    <update id="updateUserInfo" parameterType="user">
+
+        UPDATE user
+        <set>
+            <if test="nickname!=null">
+                nickname = #{nickname},
+            </if>
+            <if test="password!=null">
+                password = #{password},
+            </if>
+            <if test="email!=null">
+                email = #{email},
+            </if>
+            <if test="phone!=null">
+                phone = #{phone},
+            </if>
+            <if test="address!=null">
+                address = #{address},
+            </if>
+            <if test="salt!=null">
+                salt = #{salt},
+            </if>
+            <if test="validateCode!=null">
+                validate_code = #{validateCode},
+            </if>
+            <if test="isLocked!=null">
+                is_locked = #{isLocked},
+            </if>
+            <if test="openid!=null">
+                openid = #{openid},
+            </if>
+            <if test="unionid!=null">
+                unionid = #{unionid},
+            </if>
+            <if test="updateTime!=null">
+                update_time = #{updateTime}
+            </if>
+        </set>
+        WHERE username = #{username}
+
+    </update>
+
+    <select id="getUserInfoByValidateCode" resultType="user">
+
+       SELECT username, email
+       FROM user
+       WHERE validate_code = #{validateCode}
+
+    </select>
+
+    <select id="getAllUserInfo" resultType="user">
+
+        SELECT * FROM user
+        LIMIT #{start}, #{size}
+    </select>
+
+    <select id="getUserCount" resultType="int">
+
+        SELECT COUNT(*)
+        FROM user
+
+    </select>
+
+</mapper>

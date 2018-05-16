@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jingling.wasteservice.mapper.FirstGarbageCategoryMapper">
+
+    <insert id="add" parameterType="FirstGarbageCategory" keyProperty="id"  useGeneratedKeys="true">
+        insert into first_garbage_category(
+        id,first_name, description, photo_path
+        ) values (
+        #{id},#{firstname},#{description},#{photoPath}
+        )
+    </insert>
+
+    <select id="findFirstGarbagecategoryByName" parameterType="String"  resultType="com.jingling.wasteservice.po.FirstGarbageCategory">
+        select * from first_garbage_category WHERE first_name = #{value}
+    </select>
+
+    <delete id="deleteFirstGarbagecategoryById" parameterType="BigInteger">
+        DELETE FROM first_garbage_category WHERE id=#{value}
+    </delete>
+
+    <select id="getFirstGarbageCategoryById" parameterType="BigInteger" resultType="com.jingling.wasteservice.po.FirstGarbageCategory">
+        select * from first_garbage_category WHERE id=#{value}
+    </select>
+
+    <select id="getFirstGarbageCategoryList"  resultType="com.jingling.wasteservice.po.FirstGarbageCategory">
+        select * from first_garbage_category
+    </select>
+
+</mapper>

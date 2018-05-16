@@ -1,0 +1,14 @@
+group 'com.jingling'
+version '1.0-SNAPSHOT'
+
+allprojects{
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects{
+    apply plugin: 'java'
+    sourceCompatibility = 1.8
+}

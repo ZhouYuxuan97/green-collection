@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jingling.cmsservice.mapper.CarouselMapper">
+    <select id="queryCarousel"  resultType="com.jingling.basic.po.Carousel">
+          SELECT id, poster_id AS posterId, poster_name AS posterName, description AS description  , photo_path AS photoPath, create_time  AS createTime
+          FROM carousel
+          LIMIT #{start}, #{size}
+    </select>
+
+    <select id="countCarousel" resultType="int">
+        SELECT  COUNT(*) FROM carousel
+    </select>
+
+    <delete id="delCarouselById">
+        DELETE FROM carousel
+        WHERE id = #{id}
+    </delete>
+
+    <insert id="addCarousel" parameterType="com.jingling.basic.po.Carousel">
+        INSERT INTO carousel(poster_id,poster_name,description,photo_path)
+        VALUES(#{posterId},#{posterName},#{description},#{photoPath})
+    </insert>
+
+    <select id="queryUpdatedCarousel" parameterType="int" resultType="com.jingling.basic.po.Carousel">
+        SELECT id, poster_id AS posterId, poster_name AS posterName, description AS description  , photo_path AS photoPath, create_time  AS createTime
+        FROM carousel
+        ORDER BY create_time DESC
+        LIMIT 0, #{size}
+    </select>
+
+    <select id="viewCarouselDetailById" parameterType="int" resultType="com.jingling.basic.po.Carousel">
+        SELECT id, poster_id AS posterId, poster_name AS posterName, description AS description  , photo_path AS photoPath, create_time  AS createTime
+        FROM carousel
+        WHERE id = #{id}
+    </select>
+</mapper>

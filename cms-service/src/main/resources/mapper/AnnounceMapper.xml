@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jingling.cmsservice.mapper.AnnounceMapper">
+    <select id="queryAnnounceList" resultType="com.jingling.basic.po.Announce">
+        SELECT announce_id AS announceId, poster_id AS posterId, poster_name AS posterName, announce_title AS  announceTitle, announce_content AS  announceContent,create_time AS  createTime
+        FROM announce
+         LIMIT #{start}, #{size}
+    </select>
+
+    <select id="countAnnounce" resultType="int">
+         SELECT  COUNT(*) FROM announce
+    </select>
+
+    <delete id="delAnnounceById" parameterType="int">
+        DELETE FROM announce WHERE announce_id = #{id}
+    </delete>
+
+    <insert id="addAnnounce" parameterType="com.jingling.basic.po.Announce">
+        INSERT INTO announce(poster_id,poster_name,announce_title,announce_content)
+        VALUES (#{posterId},#{posterName},#{announceTitle},#{announceContent})
+    </insert>
+
+    <select id="viewAnnounceDetail" parameterType="int" resultType="com.jingling.basic.po.Announce">
+        SELECT announce_id AS announceId, poster_id AS posterId, poster_name AS posterName, announce_title AS  announceTitle, announce_content AS  announceContent,create_time AS  createTime
+        FROM announce
+        WHERE announce_id = #{id}
+    </select>
+
+    <select id="queryUpdatedAnnounce" parameterType="int" resultType="com.jingling.basic.po.Announce">
+        SELECT announce_id AS announceId, poster_id AS posterId, poster_name AS posterName, announce_title AS  announceTitle, announce_content AS  announceContent,create_time AS  createTime
+        FROM announce
+        ORDER BY create_time DESC
+        LIMIT 0,#{size}
+    </select>
+</mapper>

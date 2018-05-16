@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    config:
+      profile: dev
+      label: master
+      uri: http://120.79.201.63:7999/
+  application:
+    name: cms-service

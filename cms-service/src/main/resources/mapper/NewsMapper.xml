@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jingling.cmsservice.mapper.NewsMapper">
+    <select id="queryNews" resultType="com.jingling.basic.po.News">
+        SELECT id, title, subtitle, poster_id AS posterId, content, photo_path AS photoPath, poster_name AS posterName, create_time AS  createTime, update_time AS  updateTime
+        FROM news
+         LIMIT #{start}, #{size}
+    </select>
+
+    <select id="countNews" resultType="int">
+        SELECT  COUNT(*) FROM news
+    </select>
+
+    <delete id="delNewsById" parameterType="int" >
+        DELETE  FROM  news
+        WHERE id = #{id}
+    </delete>
+
+    <insert id="addNews" parameterType="com.jingling.basic.po.News">
+        INSERT INTO news(title, subtitle, poster_id, content, photo_path,poster_name)
+        VALUES (#{title},#{subtitle},#{posterId},#{content},#{photoPath},#{posterName})
+    </insert>
+
+    <select id="viewNewsDetailById" parameterType="int" resultType="com.jingling.basic.po.News">
+        SELECT  id, title, subtitle, poster_id AS posterId, content, photo_path AS photoPath, poster_name AS posterName, create_time AS  createTime, update_time AS  updateTime
+        FROM news
+        WHERE id = #{id}
+    </select>
+
+    <select id="queryUpdatedNews" parameterType="int" resultType="com.jingling.basic.po.News">
+        SELECT  id, title, subtitle, poster_id AS posterId, content, photo_path AS photoPath, poster_name AS posterName, create_time AS  createTime, update_time AS  updateTime
+        FROM news
+        ORDER BY create_time DESC
+        LIMIT 0, #{size}
+    </select>
+</mapper>
